@@ -11,7 +11,6 @@ public class TbAcademia {
 	
 	@Id
 	@Column(nullable = false, unique = true)
-	@NotBlank
 	@Min(0)
 	private Integer id;
 	

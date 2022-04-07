@@ -2,8 +2,6 @@ package br.com.polisystem.scp.controllers;
 
 import java.util.Optional;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -58,8 +56,11 @@ public class ChamadoController {
 		return chamadoRepository.findAll(page);
 	}
 	
-	@RequestMapping(method = {RequestMethod.POST, RequestMethod.PUT})
-	public TbChamados salvarChamado(@Valid TbChamados chamado) {
+	@RequestMapping(method = {RequestMethod.POST})
+	public TbChamados salvarChamado(String solicitante, String teamviewer, String problema, String solucao, int id_analista, int id_academia) {
+		TbAcademia academia = academiaRepository.findById(id_academia).get();
+		TbAnalista analista = analistaRepository.findById(id_analista).get();
+		TbChamados chamado = new TbChamados(solicitante, teamviewer, problema,solucao, analista, academia);
 		chamadoRepository.save(chamado);
 		return chamado;
 	}
